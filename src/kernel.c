@@ -12,6 +12,7 @@ void kernel_main() {
     vga_print_centered("by zethosroot and technik7585");
     delay();
     vga_clear();
+    vga_putchar('\n');
     vga_print_centered("**** VEREZ/86 BASIC V1.0 ****\n");
     vga_print_centered("128K RAM SYSTEM  32768 BASIC BYTES FREE"); // Placeholder numbers :) TODO: Read from multiboot memory map
     vga_print("\nREADY.\n");
