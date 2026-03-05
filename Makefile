@@ -14,7 +14,7 @@ ASM_SOURCES = src/boot/header.asm src/boot/boot.asm
 C_SOURCES = src/kernel.c src/drivers/vga.c src/drivers/io.c
 
 ASM_OBJECTS = $(BUILD_DIR)/header.o $(BUILD_DIR)/boot.o
-C_OBJECTS = $(BUILD_DIR)/kernel.o $(BUILD_DIR)/vga.o $(BUILD_DIR)/io.o $(BUILD_DIR)/vzstring.o $(BUILD_DIR)/keyboard.o
+C_OBJECTS = $(BUILD_DIR)/kernel.o $(BUILD_DIR)/vga.o $(BUILD_DIR)/io.o $(BUILD_DIR)/vzstring.o $(BUILD_DIR)/keyboard.o $(BUILD_DIR)/basic.o
 
 all: $(ISO)
 
@@ -45,6 +45,10 @@ $(BUILD_DIR)/io.o: src/drivers/io.c
 $(BUILD_DIR)/vzstring.o: lib/vzstring.c
 	mkdir -p $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c lib/vzstring.c -o $(BUILD_DIR)/vzstring.o
+
+$(BUILD_DIR)/basic.o: src/basic/basic.c
+	mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) -c src/basic/basic.c -o $(BUILD_DIR)/basic.o
 
 $(BUILD_DIR)/keyboard.o: src/drivers/keyboard.c
 	mkdir -p $(BUILD_DIR)

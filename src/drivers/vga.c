@@ -94,7 +94,7 @@ void vga_update_cursor(uint16_t pos) {
 
 void vga_scroll() {
     for (size_t i = 1; i < NUM_ROWS; i++) {
-        for (size_t j = 1; j < NUM_COLS; j++) {
+        for (size_t j = 0; j < NUM_COLS; j++) {
             buffer[j + NUM_COLS * (i-1)] = buffer[j + NUM_COLS * i];
         }
     }
