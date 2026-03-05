@@ -32,6 +32,14 @@ void vga_putchar(char c) {
     if (c == '\n') {
         col = 0;
         row++;
+        vga_update_cursor(row * NUM_COLS + col);
+        return;
+    }
+
+    if (c == '\b') {
+        if (col > 0) col--;
+        buffer[col + NUM_COLS * row] = (struct Char){ .character = ' ', .color = color };
+        vga_update_cursor(row * NUM_COLS + col);
         return;
     }
 
