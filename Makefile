@@ -14,9 +14,9 @@ ASM_SOURCES = src/boot/header.asm src/boot/boot.asm
 C_SOURCES = src/kernel.c src/drivers/vga.c src/drivers/io.c
 
 ASM_OBJECTS = $(BUILD_DIR)/header.o $(BUILD_DIR)/boot.o
-C_OBJECTS = $(BUILD_DIR)/kernel.o $(BUILD_DIR)/vga.o $(BUILD_DIR)/io.o
+C_OBJECTS = $(BUILD_DIR)/kernel.o $(BUILD_DIR)/vga.o $(BUILD_DIR)/io.o $(BUILD_DIR)/vzstring.o
 
-all: $(KERNEL)
+all: $(ISO)
 
 $(KERNEL): $(ASM_OBJECTS) $(C_OBJECTS)
 	mkdir -p $(DIST_DIR)
@@ -41,6 +41,14 @@ $(BUILD_DIR)/vga.o: src/drivers/vga.c
 $(BUILD_DIR)/io.o: src/drivers/io.c
 	mkdir -p $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c src/drivers/io.c -o $(BUILD_DIR)/io.o
+
+$(BUILD_DIR)/vzstring.o: lib/vzstring.c
+	mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) -c lib/vzstring.c -o $(BUILD_DIR)/vzstring.o
+
+$(ISO): $(KERNEL)
+	cp $(KERNEL) iso/boot/verez86.bin
+	grub-mkrescue -o $(ISO) iso/
 
 clean:
 	rm -rf $(BUILD_DIR) $(DIST_DIR)

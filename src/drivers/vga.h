@@ -30,3 +30,6 @@ void vga_clear();
 void vga_putchar(char c);
 void vga_print(const char* str);
 void vga_set_color(uint8_t fg, uint8_t bg);
+void vga_update_cursor(uint16_t pos);
+void vga_scroll();
+void vga_print_centered(const char* str);

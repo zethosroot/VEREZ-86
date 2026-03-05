@@ -1,0 +1,6 @@
+build/
+dist/
+iso/boot/verez86.bin
+*.iso
+*.bin
+*.o
