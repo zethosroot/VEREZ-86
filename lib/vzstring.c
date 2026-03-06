@@ -27,3 +27,29 @@ int vzstrcmp(char* str, char* str2) {
 
     return str[i] != str2[i];
 }
+
+void vzitoa(int num, char* buf) {
+    int i = 0;
+    
+    if (num == 0) {
+        buf[0] = '0';
+        buf[1] = '\0';
+        return;
+    }
+    
+    while (num > 0) {
+        buf[i++] = '0' + (num % 10);
+        num = num / 10;
+    }
+    buf[i] = '\0';
+    
+    // reverse the string
+    int left = 0, right = i - 1;
+    while (left < right) {
+        char tmp = buf[left];
+        buf[left] = buf[right];
+        buf[right] = tmp;
+        left++;
+        right--;
+    }
+}
